@@ -1,13 +1,19 @@
-import { StyleLoginSignUp } from "../styles/StyleLoginSignUp";
+import { Link } from "react-router-dom";
+import { StyledLink, StyledLoginSignUp } from "../styles/StyleLoginSignUp";
 
 export default function Login() {
     return (
-        <StyleLoginSignUp>
+        <StyledLoginSignUp>
             <h1>MyWallet</h1>
             <input placeholder="E-mail" />
             <input placeholder="Senha" />
-            <button>Entrar</button>
-            <p>Primeira vez? Cadastre-se!</p>
-        </StyleLoginSignUp>
+            <Link to="/home">
+                <button>Entrar</button>
+            </Link>
+            <StyledLink to="/cadastro">
+                Primeira vez? Cadastre-se!
+            </StyledLink>
+
+        </StyledLoginSignUp>
     );
 }

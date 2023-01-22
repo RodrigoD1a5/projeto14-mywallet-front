@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const StyleLoginSignUp = styled.div`
+export const StyledLoginSignUp = styled.div`
     width: 100%;
     min-height: 675px;
     display: flex;
@@ -45,11 +46,11 @@ export const StyleLoginSignUp = styled.div`
         border-radius: 5px;
         border: none;
     }
-    p{  
-        cursor: pointer;
-        font-family: 'Raleway';
-        font-size: 15px;
-        font-weight: 700;
-        color: #FFFFFF;
-    }
     `;
+export const StyledLink = styled(Link)`
+    cursor: pointer;
+    font-family: 'Raleway';
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+`;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ButtonsHome from "../components/ButtonsHome";
 import HomeHeader from "../components/HomeHeader";
@@ -14,8 +15,12 @@ export default function Home() {
             </HomeRecords>
 
             <HomeFooter>
-                <ButtonsHome key={"Add"} type={"Add"} />
-                <ButtonsHome key={"Remove"} type={"Remove"} />
+                <Link to="/nova-entrada">
+                    <ButtonsHome key={"Add"} type={"Add"} />
+                </Link>
+                <Link to="/nova-saida">
+                    <ButtonsHome key={"Remove"} type={"Remove"} />
+                </Link>
             </HomeFooter>
         </HomeContainer>
     );

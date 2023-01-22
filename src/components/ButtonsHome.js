@@ -41,6 +41,8 @@ const StyleButtonsHome = styled.button`
     background-color: #A328D6;
     border: none;
     border-radius: 5px;
+
+    cursor: pointer;
     p{  
         width : 40px ;
         font-family: 'Raleway';

@@ -16,6 +16,8 @@ const StyleNewRecord = styled.div`
     width: 100%;
     min-height: 675px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     padding: 25px 20px;
     h1{

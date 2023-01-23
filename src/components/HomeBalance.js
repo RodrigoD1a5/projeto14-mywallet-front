@@ -12,11 +12,11 @@ export default function HomeBalance(props) {
         let somaExpense = 0;
 
         for (let i = 0; i < collection.length; i++) {
-            somaCollection += Number(collection[i].value);
+            somaCollection += collection[i].value;
         }
 
         for (let i = 0; i < expense.length; i++) {
-            somaExpense += Number(expense[i].value);
+            somaExpense += expense[i].value;
         }
         if (collection.length > 0 && expense.length > 0) {
             return balance = (somaCollection - somaExpense);
@@ -34,7 +34,7 @@ export default function HomeBalance(props) {
     return (
         <StyledBalance balance={balance}>
             <span>SALDO</span>
-            <p>{Number(balance).toLocaleString("pt-br", { minimumFractionDigits: 2 })}</p>
+            <p>{balance.toLocaleString("pt-br", { minimumFractionDigits: 2 })}</p>
         </StyledBalance>
     );
 

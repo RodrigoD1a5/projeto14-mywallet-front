@@ -1,26 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
+// import apiAuth from "../../services/apiAuth";
 import { StyledButton } from "../styles/StyledButton";
 import { StyledForm } from "../styles/StyledForm";
 import { StyledInput } from "../styles/StyledInput";
 import { StyledLink } from "../styles/StyledLink";
 import { StyledLoginSignUp } from "../styles/StyledLoginSignUp";
 
-
 export default function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
-
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
     function handleLogin(e) {
         e.preventDefault();
-        console.log(form);
-        navigate("/home");
-    }
 
+        // apiAuth.login(form)
+        //     .then((response) => {
+        //         const { nome, token } = response.data.user;
+        //         setUser({ nome, token });
+        //         navigate("/home");
+        //     })
+        //     .catch((error) => {
+        //         alert(error.response.data.message);
+        //     });
+    }
     return (
         <StyledLoginSignUp>
             <h1>MyWallet</h1>

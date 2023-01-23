@@ -1,22 +1,40 @@
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ButtonsHome from "../components/ButtonsHome";
 import HomeBalance from "../components/HomeBalance";
 import HomeHeader from "../components/HomeHeader";
 import HomeRecords from "../components/HomeRecords";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Home() {
     const message = "Não há registros deentrada ou saída";
+    const { user } = useContext(UserContext);
     const records = [
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "expense" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "expense" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "expense" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "expense" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "expense" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "collection" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "collection" },
-        { date: "30/11", text: "Almoço mãe", value: "39.90", type: "collection" }
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "expense" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "expense" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "expense" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "expense" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "expense" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "collection" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "collection" },
+        { date: "30/11", text: "Almoço mãe", value: 39.90, type: "collection" }
     ];
+
+    // const {records , setRecords} = useState([])
+
+    // useEffect(getTransations, []);
+
+    // function getTransations(){
+    //     apiRecords.getRecords(user.token)
+    //         .then((response) => {
+    //             setRecords(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error.response.data.message);
+    //             navigate("/");
+    //         });
+    // }
     return (
         <HomeContainer>
             <HomeHeader />
@@ -25,7 +43,7 @@ export default function Home() {
                     {(!records) ?
                         <HomeRecords message={message} />
                         :
-                        records.map((r) => <HomeRecords date={r.date} text={r.text} value={r.value} type={r.type} />)
+                        records.map((r, idx) => <HomeRecords key={idx} date={r.date} text={r.text} value={r.value} type={r.type} />)
                     }
                 </div>
 

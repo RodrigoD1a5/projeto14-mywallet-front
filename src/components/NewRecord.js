@@ -1,16 +1,38 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { StyledButton } from "../styles/StyledButton";
 import { StyledForm } from "../styles/StyledForm";
 import { StyledInput } from "../styles/StyledInput";
 
 export default function NewRecord({ type }) {
+    const [form, setForm] = useState({ type, value: "", text: "" });
 
+    function handleForm(e) {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    }
+
+    function handleNewRecords(e) {
+        e.preventDefault();
+
+    }
     return (
         <StyleNewRecord>
             <h1>{type === "collection" ? "Nova Entrada" : "Nova Saída"} </h1>
-            <StyledForm>
-                <StyledInput placeholder="Valor" />
-                <StyledInput placeholder="Descrição" />
+            <StyledForm onSubmit={handleNewRecords}>
+                <StyledInput
+                    name="number"
+                    type="number"
+                    required
+                    value={form.number}
+                    onChange={handleForm}
+                    placeholder="Valor" />
+                <StyledInput
+                    name="text"
+                    type="text"
+                    required
+                    value={form.text}
+                    onChange={handleForm}
+                    placeholder="Descrição" />
                 <StyledButton>{type === "collection" ? "Salvar entrada" : "Salvar saída"} </StyledButton>
             </StyledForm>
 

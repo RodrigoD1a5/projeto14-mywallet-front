@@ -1,13 +1,19 @@
 import styled from "styled-components";
+import { StyledButton } from "../styles/StyledButton";
+import { StyledForm } from "../styles/StyledForm";
+import { StyledInput } from "../styles/StyledInput";
 
 export default function NewRecord({ type }) {
 
     return (
         <StyleNewRecord>
             <h1>{type === "collection" ? "Nova Entrada" : "Nova Saída"} </h1>
-            <input placeholder="Valor" />
-            <input placeholder="Descrição" />
-            <button>{type === "collection" ? "Salvar entrada" : "Salvar saída"} </button>
+            <StyledForm>
+                <StyledInput placeholder="Valor" />
+                <StyledInput placeholder="Descrição" />
+                <StyledButton>{type === "collection" ? "Salvar entrada" : "Salvar saída"} </StyledButton>
+            </StyledForm>
+
         </StyleNewRecord>
     );
 }
@@ -27,35 +33,4 @@ const StyleNewRecord = styled.div`
         font-size: 26px;
         color: #FFFFFF;
        
-    }
-    input{
-        width: 326px;
-        height: 56px;
-        margin-bottom: 13px;
-
-        border-radius: 5px;
-        border: none;
-
-
-        text-indent: 15px;
-        font-size: 20px;
-        font-family: 'Raleway', sans-serif;
-    }
-    input::placeholder{
-        color: #000000;
-    }
-    button{
-        cursor: pointer;
-        width: 326px;
-        height: 46px;
-        margin-bottom: 36px;
-
-        font-size: 20px;
-        font-family: 'Raleway', sans-serif;
-        color: #FFFFFF;
-
-        background-color: #A328D6;
-        border-radius: 5px;
-        border: none;
-    }
-`;
+    };`;

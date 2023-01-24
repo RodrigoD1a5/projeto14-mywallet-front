@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import apiAuth from "../services/apiAuth";
 import { StyledButton } from "../styles/StyledButton";
 import { StyledForm } from "../styles/StyledForm";
 import { StyledInput } from "../styles/StyledInput";
@@ -18,8 +19,17 @@ export default function SignUp() {
         if (form.password != form.passwordConfirmation) {
             return alert("Senhas diferentes");
         }
-        navigate("/");
         console.log(form);
+
+        apiAuth.signUp(form)
+            .then((response) => {
+                alert(response.data);
+                navigate("/");
+            })
+            .catch((error) => {
+                alert(`${error.response.status}, ${error.response.data}`);
+
+            });
     }
 
     return (

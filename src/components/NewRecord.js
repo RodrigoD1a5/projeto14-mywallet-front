@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { UserContext } from "../contexts/UserContext";
 import { StyledButton } from "../styles/StyledButton";
 import { StyledForm } from "../styles/StyledForm";
 import { StyledInput } from "../styles/StyledInput";
+import apiRecords from "../services/apiRecords";
+import { useNavigate } from "react-router-dom";
+
 
 export default function NewRecord({ type }) {
+    const { user } = useContext(UserContext);
     const [form, setForm] = useState({ type, value: "", text: "" });
-
+    const navigate = useNavigate();
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
@@ -14,13 +19,23 @@ export default function NewRecord({ type }) {
     function handleNewRecords(e) {
         e.preventDefault();
 
+        apiRecords.newRecord(form, user.token)
+            .then((response) => {
+                alert(response.data);
+                navigate("/home");
+            })
+            .catch((error) => {
+                alert(error.response.data.message);
+            });
+
+
     }
     return (
         <StyleNewRecord>
             <h1>{type === "collection" ? "Nova Entrada" : "Nova Saída"} </h1>
             <StyledForm onSubmit={handleNewRecords}>
                 <StyledInput
-                    name="number"
+                    name="value"
                     type="number"
                     required
                     value={form.number}

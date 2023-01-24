@@ -1,12 +1,13 @@
+import { useContext } from "react";
 import { LogOutOutline } from "react-ionicons";
 import styled from "styled-components";
+import { UserContext } from "../contexts/UserContext";
 
 export default function HomeHeader() {
-
-    // const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     return (
         <StyleHomeHeader>
-            {/* <h1>Olá, Fulano {user.nome}</h1> */}
+            <h1>Olá, {user.nome}</h1>
             <LogOutOutline
                 color={'#ffffff'}
                 title={LogOutOutline}

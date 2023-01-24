@@ -9,11 +9,14 @@ function createConfig(token) {
 }
 
 function getRecords(token) {
-    const promise = axios.get(`${process.env.REACT_APP_API_URL}/entries`, createConfig(token));
+    const promise = axios.get("http://localhost:5000/records", createConfig(token));
     return promise;
 }
 
 function newRecord(body, token) {
-    const promise = axios.post(`${process.env.REACT_APP_API_URL}/new-entry`, body, createConfig(token));
+    const promise = axios.post("http://localhost:5000/records", body, createConfig(token));
     return promise;
 }
+
+const apiRecords = { getRecords, newRecord };
+export default apiRecords;

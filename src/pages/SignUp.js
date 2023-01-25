@@ -14,28 +14,25 @@ export default function SignUp() {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
-    function handleLogin(e) {
+    function handleSignUp(e) {
         e.preventDefault();
         if (form.password != form.passwordConfirmation) {
             return alert("Senhas diferentes");
         }
-        console.log(form);
-
         apiAuth.signUp(form)
             .then((response) => {
                 alert(response.data);
                 navigate("/");
             })
             .catch((error) => {
-                alert(`${error.response.status}, ${error.response.data}`);
-
+                alert(error.response.data);
             });
     }
 
     return (
         <StyledLoginSignUp>
             <h1>MyWallet</h1>
-            <StyledForm onSubmit={handleLogin}>
+            <StyledForm onSubmit={handleSignUp}>
                 <StyledInput
                     name="nome"
                     type="text"

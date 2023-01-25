@@ -4,15 +4,12 @@ import Home from "./pages/Home";
 import NewCollection from "./pages/NewCollection";
 import NewExpense from "./pages/NewExpense";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import { UserContext } from "./contexts/UserContext";
+import UserProvider, { UserContext } from "./contexts/UserContext";
 
 export default function App() {
-  const [user, setUser] = useState({});
-  console.log(user);
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
@@ -20,7 +17,7 @@ export default function App() {
           <Route path="/nova-entrada" element={<NewCollection />} />
           <Route path="/nova-saida" element={<NewExpense />} />
         </Routes>
-      </UserContext.Provider>
+      </UserProvider>
     </BrowserRouter>
   );
 }

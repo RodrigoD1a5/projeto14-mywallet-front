@@ -12,6 +12,7 @@ export default function NewRecord({ type }) {
     const { user } = useContext(UserContext);
     const [form, setForm] = useState({ type, value: "", text: "" });
     const navigate = useNavigate();
+
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
@@ -25,9 +26,8 @@ export default function NewRecord({ type }) {
                 navigate("/home");
             })
             .catch((error) => {
-                alert(error.response.data.message);
+                alert(error.response.data);
             });
-
 
     }
     return (
@@ -38,7 +38,7 @@ export default function NewRecord({ type }) {
                     name="value"
                     type="number"
                     required
-                    value={form.number}
+                    value={form.value}
                     onChange={handleForm}
                     placeholder="Valor" />
                 <StyledInput

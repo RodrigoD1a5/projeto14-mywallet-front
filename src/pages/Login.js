@@ -23,10 +23,12 @@ export default function Login() {
                 alert("Login efetuado com sucesso!");
                 const { nome, token } = response.data;
                 setUser({ nome, token });
+                localStorage.setItem("user", JSON.stringify({ nome, token }));
+
                 navigate("/home");
             })
             .catch((error) => {
-                alert(error.response.data.message);
+                alert(error.response.data);
             });
     }
     return (

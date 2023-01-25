@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ButtonsHome from "../components/ButtonsHome";
 import HomeBalance from "../components/HomeBalance";
@@ -9,10 +9,12 @@ import { UserContext } from "../contexts/UserContext";
 import apiRecords from "../services/apiRecords";
 
 export default function Home() {
-    const message = "Não há registros deentrada ou saída";
+    const message = "Não há registros de entrada ou saída";
     const { user } = useContext(UserContext);
-    const navigate = useNavigate();
     const [records, setRecords] = useState(undefined);
+
+    const isThereRecords = (records?.length > 0);
+
 
     useEffect(getTransations, []);
 
@@ -22,23 +24,28 @@ export default function Home() {
                 setRecords(response.data);
             })
             .catch((error) => {
-                console.log(error);
-                navigate("/");
+                if (!user.token) {
+                    alert("Faça Login");
+                }
+                else {
+                    alert(error.response.data);
+                };
+
             });
     }
     return (
         <HomeContainer>
             <HomeHeader />
-            <StyledHomeRecords records={records}>
-                <div className="records">
-                    {(records) ?
-                        <HomeRecords message={message} />
-                        :
-                        records.map((r, idx) => <HomeRecords key={idx} date={r.date} text={r.text} value={r.value} type={r.type} />)
-                    }
-                </div>
+            <StyledHomeRecords isThereRecords={isThereRecords}>
+                {(!isThereRecords) ?
+                    <HomeRecords message={message} />
+                    :
+                    <div className="records">
+                        {records?.map((r, idx) => <HomeRecords key={idx} date={r.date} text={r.text} value={r.value} type={r.type} />)}
+                    </div>
+                }
 
-                {!records ? <HomeBalance records={records} /> : ""}
+                {isThereRecords ? <HomeBalance records={records} /> : ""}
             </StyledHomeRecords>
             <HomeFooter>
                 <Link to="/nova-entrada">
@@ -76,11 +83,12 @@ const StyledHomeRecords = styled.div`
     
     display: flex;
     flex-direction: column;
-    justify-content: ${props => props.records ? "space-between" : "center"};
+    justify-content: ${props => props.isThereRecords ? "space-between" : "center"};
     align-items: center;  
     .records{
         width: 100%;
-        max-height: 420px;
+        height: 350px;
+        overflow-y: scroll;
         gap: 10px 0;
         display: flex;
         flex-direction: column;

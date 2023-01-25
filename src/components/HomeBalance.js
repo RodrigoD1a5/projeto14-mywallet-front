@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export default function HomeBalance(props) {
     const { records } = props;
-    let balance = 0;
 
     function result(records) {
         const collection = records.filter((r) => r.type === "collection");
@@ -12,29 +11,30 @@ export default function HomeBalance(props) {
         let somaExpense = 0;
 
         for (let i = 0; i < collection.length; i++) {
-            somaCollection += collection[i].value;
+            somaCollection += Number(collection[i].value);
         }
 
         for (let i = 0; i < expense.length; i++) {
-            somaExpense += expense[i].value;
+            somaExpense += Number(expense[i].value);
         }
         if (collection.length > 0 && expense.length > 0) {
-            return balance = (somaCollection - somaExpense);
+            let balance = (somaCollection - somaExpense);
+            return balance;
         }
         else if (collection.length === 0) {
-            return balance = somaExpense;
+            let balance = somaExpense;
+            return balance;
         }
         else if (expense.length === 0) {
-            return balance = somaCollection;
+            let balance = somaCollection;
+            return balance;
         }
-
     }
-    result(records);
 
     return (
-        <StyledBalance balance={balance}>
+        <StyledBalance balance={result(records)}>
             <span>SALDO</span>
-            <p>{balance.toLocaleString("pt-br", { minimumFractionDigits: 2 })}</p>
+            <p>{result(records).toLocaleString("pt-br", { minimumFractionDigits: 2 })}</p>
         </StyledBalance>
     );
 
@@ -53,7 +53,7 @@ const StyledBalance = styled.div`
     }
     p{
         font-weight: 400;
-        color: ${props => props.balance > 0 ? "#03AC00" : "#C70000"}
+        color: ${props => props.balance >= 0 ? "#03AC00" : "#C70000"}
     }
 
 `;
